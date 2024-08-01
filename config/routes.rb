@@ -2,11 +2,11 @@ Rails.application.routes.draw do
 
   # deviseというgemを使ったユーザー認証機能を実装するためのルーティングを設定
   # devise_for :usersは、devise gemを使用してユーザー認証機能を追加するためのルーティング設定
-  #そのため、下記のresources :usersよりも前に記述しなくてはいけない！
+  #m無限ループ回避のため、下記のresources :usersよりも前に記述しなくてはいけない！
   devise_for :users
 
   root to: 'homes#top'
-  get 'home/about', to: "homes#about"
+  get 'home/about', to: "homes#about"  #get 'home/about' => 'homes#about', as: 'about'
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update]
   resources :users, only: [:index,:show,:edit,:update]
