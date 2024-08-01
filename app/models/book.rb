@@ -1,5 +1,8 @@
 class Book < ApplicationRecord
+
   belongs_to :user
+  #BookCommentモデルのidとの関連付け
+  has_many :book_comments, dependent: :destroy
   #Favoriteモデルのidとの関連付け
   has_many :favorites, dependent: :destroy
 

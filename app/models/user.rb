@@ -7,7 +7,9 @@ class User < ApplicationRecord
   #アソシエーションの関係（1:Nの1側）
   has_many :books, dependent: :destroy
 
-   #Favoriteモデルのidとの関連付け
+  #BookCommentモデルのidとの関連付け
+  has_many :book_comments, dependent: :destroy
+  #Favoriteモデルのidとの関連付け
   has_many :favorites, dependent: :destroy
 
   has_one_attached :profile_image

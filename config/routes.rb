@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   root to: 'homes#top'
   get 'home/about', to: "homes#about"  #get 'home/about' => 'homes#about', as: 'about'
 
-  resources :books, only: [:index,:show,:edit,:create,:destroy,:update]
+  #コメントは書籍に対しされるため、book_commentsはbooksに結び付く（親子関係）
+  resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
+    resources :book_comments, only: [:create]
+  end
+
   resources :users, only: [:index,:show,:edit,:update]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
