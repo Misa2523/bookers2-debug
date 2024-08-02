@@ -5,6 +5,9 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @user = @book.user  #その本の作成者を@userに格納
     @book_new = Book.new
+
+    #コメント保存の箱
+    @book_comment = BookComment.new
   end
 
   def index
