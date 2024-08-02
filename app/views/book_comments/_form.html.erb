@@ -1,0 +1,10 @@
+<!--コメント投稿フォーム-->
+
+<div>
+  <!--コメントはbookに結び付いたbook_commentであるため、変数を２つ用意-->
+  <!--book_commentをcreateするためのリクエストは、ルーティングもネスト（親子関係）してるため、上記２つの情報が必要-->
+  <%= form_with model: [book, book_comment] do |f| %>
+    <div><%= f.text_area :comment, class: 'form-control' %></div>
+    <div><%= f.submit "送信" %></div>
+  <% end %>
+</div>

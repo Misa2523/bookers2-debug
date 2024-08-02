@@ -17,6 +17,10 @@ class BookCommentsController < ApplicationController
     #ローカル変数.destroy
     #の、省略記述 ↓
     BookComment.find(params[:id]).destroy
+    #下記コードでもよい（下記の方が検索条件を絞っているから処理が速くなる）
+    #BookComment.find_by(id: params[:id], book_id: params[:book_id]).destroy
+    
+    
     redirect_to book_path(params[:book_id])
   end
 
