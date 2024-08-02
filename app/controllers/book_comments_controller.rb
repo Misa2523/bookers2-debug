@@ -12,6 +12,14 @@ class BookCommentsController < ApplicationController
     redirect_to book_path(book.id)
   end
 
+  def destroy
+    #ローカル変数=BookComment.find(params[:id])
+    #ローカル変数.destroy
+    #の、省略記述 ↓
+    BookComment.find(params[:id]).destroy
+    redirect_to book_path(params[:book_id])
+  end
+
 
 
   private

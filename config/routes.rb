@@ -8,9 +8,13 @@ Rails.application.routes.draw do
   root to: 'homes#top'
   get 'home/about', to: "homes#about"  #get 'home/about' => 'homes#about', as: 'about'
 
-  #コメントは書籍に対しされるため、book_commentsはbooksに結び付く（親子関係）
+  #いいね、コメントはそれぞれ書籍に対しされるため、favoriteとbook_commentsはbooksに結び付く（親子関係）
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
-    resources :book_comments, only: [:create]
+    #いいね機能のみresourceで単数形→/:idがURLに含まれなくなる
+    #1投稿に対しいいねは1回のみ → destroyの時ユーザーidとbookのidが分かればどのいいねをけせばいいか分かる
+      # → いいねのidはURLに含める必要がない（params[:id]を使わなくていい）ため、resourceという単数形
+    resource :favorite, only: [:create, :destroy]
+    resources :book_comments, only: [:create, :destroy]
   end
 
   resources :users, only: [:index,:show,:edit,:update]

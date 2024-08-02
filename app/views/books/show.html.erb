@@ -26,7 +26,20 @@
            <!--書籍詳細画面(books/show.html.erb)へ遷移-->
           <td><%= link_to @book.title, @book %></td>
           <td><%= @book.body %></td>
-          <td>ここはいいねを表示</td>
+          <!--いいね表示-->
+          <td>
+            <!--いいねがクリックされている状態と、されていない状態で表示を変える-->
+            <% if @book.favorited_by?(current_user) %><!--いいねがされてたら-->
+              <%= link_to book_favorite_path(@book), method: :delete do %><!--いいねを消す-->
+                ♥<%= @book.favorites.count %>
+              <% end %>
+            <% else %><!--いいねがまだされてなかったら-->
+              <%= link_to book_favorite_path(@book), method: :post do %><!--いいねをする-->
+                ♥<%= @book.favorites.count %>
+              <% end %>
+            <% end %>
+          </td>
+          <!--コメント表示-->
           <td>コメント数:<%= @book.book_comments.count %></td>
           <% if @book.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
@@ -44,6 +57,13 @@
             <%= book_comment.user.name %></td>
             <!--コメント本文-->
             <td><%= book_comment.comment %></td>
+            <!--コメント削除ボタン-->
+            <td>
+              <% if book_comment.user == current_user %>
+                <!--book_comment.bookはbook_commentの親のbookの情報（id）、book_commentはbook_commentの情報（id）を表す-->
+                <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </table>
