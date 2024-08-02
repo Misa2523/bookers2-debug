@@ -41,6 +41,7 @@
           </td>
           <!--コメント表示-->
           <td>コメント数:<%= @book.book_comments.count %></td>
+          <!--書籍作成者がログインしてるユーザーだったら編集ボタンと削除ボタンを表示-->
           <% if @book.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
             <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
@@ -53,15 +54,15 @@
           <tr>
             <!--コメント投稿者の画像-->
             <td><%= image_tag book_comment.user.get_profile_image, size:"100x100" %><br>
-            <!--コメント投稿者の名前-->
-            <%= book_comment.user.name %></td>
+            <!--コメント投稿者の名前（クリックしたらそのユーザーの詳細画面へ遷移）-->
+            <%= link_to book_comment.user.name, user_path(book_comment.user.id) %></td><!--book_comment.user.name-->
             <!--コメント本文-->
             <td><%= book_comment.comment %></td>
             <!--コメント削除ボタン-->
             <td>
               <% if book_comment.user == current_user %>
                 <!--book_comment.bookはbook_commentの親のbookの情報（id）、book_commentはbook_commentの情報（id）を表す-->
-                <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete %>
+                <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete, class: "btn btn-sm btn-danger" %>
               <% end %>
             </td>
           </tr>
