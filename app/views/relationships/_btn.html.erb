@@ -3,7 +3,7 @@
 <!--ログインしてるユーザーと表示対象のユーザーが異なるなら-->
 <% if current_user != user %>
   <!--ログインしてるユーザーが表示対象のユーザーをすでにフォローしているなら-->
-  <% if current_user.following?(user) %>
+  <% if current_user.following?(user) %>  <!--models/user.rbで定義したfollowing?(user)メソッド呼び出し-->
     <!--class: options[:class].presence || "btn btn-info"　　これはボタンのクラスを呼び出し場所によって変えている-->
       <!--options[:class].presence は、options[:class] の値が存在する(presence)場合はその値を返し、存在しない（空の文字列である）場合は nil を返す-->
       <!--||はor演算子(左辺がtrueなら左辺が返されfalseなら右辺が返される)-->
