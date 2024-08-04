@@ -14,14 +14,18 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
 
-  #フォローしている関連付け
-  has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  #フォローされている関連付け
-  has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
-  #フォローしているユーザーを取得
-  has_many :followings, through: active_relationships, source: :followed
-  #フォロワーを取得
-  has_many :followers, through: passive_relationships, source: :follower
+
+  #あるユーザーがフォローしている人（フォロイー）の一覧を取得するアソシエーション
+    #relationshipsというオブジェクト名で、Relationshipモデルとfollower_idを外部キーとしてアソシエーションを行う
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+    #followingsというオブジェクト名で、上記で設定したrelationshipsというアソシエーションを利用してRelationshipモデルを参照し、参照先のRelationshipモデルのfollowedというアソシエーションを行う
+  has_many :followings, through: :relationships, source: :followed
+
+  #あるユーザーをフォローしている人（フォロワー）の一覧を取得するアソシエーション
+    #reverse_of_relationshipsというオブジェクト名で、Relationshipモデルとfollowed_idを外部キーとしてアソシエーションを行う
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+    #followersというオブジェクト名で、1で設定したreverse_of_relationshipsというアソシエーションを利用してRelationshipモデルを参照し、参照先のRelationshipモデルのfollowerというアソシエーションを行う
+  has_many :followers, through: :reverse_of_relationships, source: :follower
 
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
@@ -32,14 +36,14 @@ class User < ApplicationRecord
   end
 
 
-  #指定したユーザーをフォローする
+  #指定したユーザーをフォローする（active_relationshipsを経由して指定したユーザーをフォロー）
   def follow(user)
-    active_relationships.create(followed_id: user.id)
+    relationships.create(followed_id: user.id)
   end
 
   #指定したユーザーのフォローを解除する
   def unfollow(user)
-    active_relationships.find_by(followed_id: user.id).destroy
+    relationships.find_by(followed_id: user.id).destroy
   end
 
   #指定したユーザーをフォローしているかどうかを判定
