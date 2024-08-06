@@ -51,15 +51,19 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
-  #検索機能のプルダウンメニューの設定
-  def self.search_for(content, method)
+  #検索条件に応じてデータベースから該当するユーザーを取得
+  def self.search_for(content, method)  #selfをつけると、Userクラス自体のsearch_forメソッドを定義
     if method == 'perfect'
+      #モデルクラス.where(カラム名: 値)　完全一致
       User.where(name: content)
     elsif method == 'forward'
+      #モデルクラス.where('カラム名 LIKE?', 値+'%')  前方一致
       User.where('name LIKE ?', content+'%')
     elsif method == 'backward'
+                                #'%'+値　後方位置
       User.where('name LIKE ?', '%'+content)
     else
+                                #'%'+値+'%')  値(文字列)を含む
       User.where('name LIKE ?', '%'+content+'%')
     end
   end
