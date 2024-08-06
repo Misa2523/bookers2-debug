@@ -1,0 +1,21 @@
+<!--検索機能-->
+
+<div class="search_form">
+  <%= form_with url: searches_search_path, method: :get, local: true do |f| %>
+
+    <%= f.text_field :content %>
+    <!--プルダウンメニューでuserかbookかを選択-->
+    <%= f.select :model, options_for_select({"User"=>"user", "Book"=>"book"}) %>
+    <!--プルダウンメニューで一致条件を選択-->
+    <%= f.select :method, options_for_select({"完全一致"=>"perfect", "前方一致"=>"forward", "後方一致"=>"backward", "部分一致"=>"partial"}) %>
+    <%= f.submit '検索' %>
+  <% end %>
+</div>
+
+
+<!--
+options_for_select：プルダウンの中身を指定
+({" プルダウンで表示する文字 " => " DBに渡す値(モデル名など) "})
+
+「補足」 include_blank: "選択" などを追加すると、デフォルトの選択肢を 選択 にできる
+-->

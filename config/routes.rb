@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'searches/search'
   # deviseというgemを使ったユーザー認証機能を実装するためのルーティングを設定
   # devise_for :usersは、devise gemを使用してユーザー認証機能を追加するためのルーティング設定
   #m無限ループ回避のため、下記のresources :usersよりも前に記述しなくてはいけない！
@@ -8,7 +7,7 @@ Rails.application.routes.draw do
 
   root to: 'homes#top'
   get 'home/about', to: "homes#about"  #get 'home/about' => 'homes#about', as: 'about'
-
+  get 'searches/search'
   #いいね、コメントはそれぞれ書籍に対しされるため、favoriteとbook_commentsはbooksに結び付く（親子関係）
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
     #いいね機能のみresourceで単数形→/:idがURLに含まれなくなる
@@ -23,7 +22,7 @@ Rails.application.routes.draw do
       get "followings" => "relationships#followings", as: "followings"
       get "followers" => "relationships#followers", as: "followers"
   end
-    
+
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
