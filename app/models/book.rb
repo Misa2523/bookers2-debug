@@ -14,4 +14,21 @@ class Book < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
 
+  #検索条件に応じてデータベースから該当する書籍を取得
+  def self.search_for(content, method)  #selfをつけると、Userクラス自体のsearch_forメソッドを定義
+    if method == 'perfect'
+      #モデルクラス.where(カラム名: 値)　完全一致
+      Book.where(title: content)
+    elsif method == 'forward'
+      #モデルクラス.where('カラム名 LIKE?', 値+'%')  前方一致
+      Book.where('title LIKE ?', content+'%')
+    elsif method == 'backward'
+                                #'%'+値　後方位置
+      Book.where('title LIKE ?', '%'+content)
+    else
+                                #'%'+値+'%')  値(文字列)を含む
+      Book.where('title LIKE ?', '%'+content+'%')
+    end
+  end
+
 end
