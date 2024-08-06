@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'searches/search'
   # deviseというgemを使ったユーザー認証機能を実装するためのルーティングを設定
   # devise_for :usersは、devise gemを使用してユーザー認証機能を追加するためのルーティング設定
   #m無限ループ回避のため、下記のresources :usersよりも前に記述しなくてはいけない！
