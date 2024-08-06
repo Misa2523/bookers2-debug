@@ -60,7 +60,7 @@ class User < ApplicationRecord
     elsif method == 'backward'
       User.where('name LIKE ?', '%'+content)
     else
-      User.where('nake LIKE ?', '%'+content+'%')
+      User.where('name LIKE ?', '%'+content+'%')
     end
   end
 

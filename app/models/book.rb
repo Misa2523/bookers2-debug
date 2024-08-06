@@ -16,7 +16,7 @@ class Book < ApplicationRecord
 
   #検索機能のプルダウンメニューの設定
   def self.search_for(content, method)
-    if methdo == 'perfect'
+    if method == 'perfect'
       Book.where(title: content)
     elsif method == 'forward'
       Book.where('title LIKE ?', content+'%')
