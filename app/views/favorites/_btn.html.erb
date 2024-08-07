@@ -2,11 +2,12 @@
 
 <!--いいねがクリックされている状態と、されていない状態で表示を変える-->
 <% if book.favorited_by?(current_user) %><!--いいねがされてたら-->
-  <%= link_to book_favorite_path(book), method: :delete do %><!--いいねを消す-->
+  <!--link_toにオプションremomte: trueを記述すると非同期の状態になり、JavaScript形式でリクエストを送るようになる-->
+  <%= link_to book_favorite_path(book), method: :delete, remote: true do %><!--いいねを消す-->
     ♥<%= book.favorites.count %>
   <% end %>
 <% else %><!--いいねがまだされてなかったら-->
-  <%= link_to book_favorite_path(book), method: :post do %><!--いいねをする-->
+  <%= link_to book_favorite_path(book), method: :post, remote: true do %><!--いいねをする-->
     ♥<%= book.favorites.count %>
   <% end %>
 <% end %>
