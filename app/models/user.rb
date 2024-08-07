@@ -53,6 +53,10 @@ class User < ApplicationRecord
 
   #検索条件に応じてデータベースから該当するユーザーを取得
   def self.search_for(content, method)  #selfをつけると、Userクラス自体のsearch_forメソッドを定義
+    #.selfをつけると、searches_controllerで呼び出す際にUser.をつけて呼び出せるようになる
+    #つけないとそのメソッドのみを表すが、selfをつけると規模感が大きくなりこのUserクラス(Userモデル)全体に働きかけるようになる
+    #参考URL：https://note.com/standenglish/n/nf231e8b464d0
+
     if method == 'perfect'
       #モデルクラス.where(カラム名: 値)　完全一致
       User.where(name: content)
