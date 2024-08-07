@@ -26,8 +26,10 @@
            <!--書籍詳細画面(books/show.html.erb)へ遷移-->
           <td><%= link_to @book.title, @book %></td>
           <td><%= @book.body %></td>
-          <!--いいね表示　　部分テンプレート-->
-          <td><%= render "favorites/btn", book: @book %></td>
+          <!--いいね表示　　部分テンプレート（非同期通信の実装済み）-->
+          <td class=<%= "favorite-" + @book.id.to_s %> >
+            <%= render "favorites/btn", book: @book %>
+          </td>
           <!--コメント表示-->
           <td>コメント数:<%= @book.book_comments.count %></td>
           <!--書籍作成者がログインしてるユーザーだったら編集ボタンと削除ボタンを表示-->

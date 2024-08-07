@@ -1,0 +1,17 @@
+<!--いいねの非同期化-->
+
+<!--$('')の中に入ったclassをfavorites/btnのhtml（部分テンプレート）に書き換えるための記述　＝　特定の要素のHTMLコンテンツを、非同期通信により返されたHTMLコードで置き換えている-->
+$('.favorite-<%= @favorite.book_id %>').html("<%= j(render 'favorites/btn',  book: @favorite.book ) %>")
+
+<!--
+$('.favorite-<= @favorite.book_id >')の部分（%を省いている）
+　→特定のCSSクラスを持つ要素を選択するためのiQueryのセレクタ
+  →@favorite.book_idは、Rubyのコードで動的に生成された書籍のID（この部分で特定の書籍に関する要素を選択してる）
+
+.html()関数
+  →選択した要素の中身を置き換えるために使用
+
+"<= j(render 'favorites/btn',  book: @favorite.book ) >"の部分（%を省いている）
+  →Rubyのコードで生成されたHTMLを文字列として表してる
+  →render関数により、favorites/btn部分テンプレートを呼び出す（@favorite.bookがローカル変数として渡される）
+-->

@@ -18,8 +18,11 @@
         </td>
         <td><%= link_to book.title,book %></td>
         <td><%= book.body %></td>
-        <!--いいね表示　　部分テンプレート-->
-        <td><%= render "favorites/btn", book: book %></td>
+        <!--いいね表示　　部分テンプレート（非同期通信の実装済み）-->
+            <!--特定の書籍に関連するCSSクラスを指定。book.id.to_sは動的に生成された書籍ID-->
+        <td class=<%= "favorite-" + book.id.to_s %> >   <!--書籍IDが1の場合はfavorite-aというCSSクラスが追加される-->
+          <%= render "favorites/btn", book: book %>
+        </td>
         <!--コメント表示-->
         <td>コメント数:<%= book.book_comments.count %></td>
       </tr>
