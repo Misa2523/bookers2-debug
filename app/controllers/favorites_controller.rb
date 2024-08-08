@@ -11,7 +11,7 @@ class FavoritesController < ApplicationController
     favorite.save
 
     #非同期通信を行う場合JavaScriptファイルを使用してビューを更新する。
-    #アクション内に遷移の記述がない場合Railsは自動的に対応するJavaScriptファイルを探す
+    #アクション内に遷移の記述がない場合Railsは自動的に対応するJavaScriptファイルを探すため、下記のredirect_toを削除
 
     #同じページに遷移（いいねはindexページとshowページ両方で行うためこれを使う）
     #redirect_to  request.referer    #リファラー

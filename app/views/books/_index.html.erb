@@ -23,8 +23,10 @@
         <td id="favorite_btn_<%= book.id %>" >   <!--書籍IDが1の場合はfavorite_btn_1というidになる-->
           <%= render "favorites/btn", book: book %>
         </td>
-        <!--コメント数表示　部分テンプレート-->
-        <td><%= render "book_comments/counter", book: book %></td>
+        <!--コメント数表示　　部分テンプレート（非同期通信の実装済み）-->
+        <td　id="comment_counter">
+          <%= render "book_comments/counter", book: book %>
+        </td>
       </tr>
     <% end %>
   </tbody>

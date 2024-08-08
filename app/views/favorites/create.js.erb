@@ -1,9 +1,9 @@
 <!--いいねの非同期化　　idかclassで設定する（今回はidで行う）-->
 
 <!--$("")の中に入ったidをfavorites/btnのhtml（部分テンプレート）に書き換えるための記述　＝　特定の要素のHTMLコンテンツを、非同期通信により返されたHTMLコードで置き換えている-->
-$("#favorite_btn_<%= @book.id %>").html("<%= j(render 'favorites/btn',  book: @book) %>")
+$("#favorite_btn_<%= @book.id %>").html("<%= j(render 'favorites/btn',  book: @book) %>");
 
-<!--基本の書き方　$().html(j(javascript))-->
+<!--基本の書き方　$().html(j(javascript));-->
 <!--$("#favorite_btn_<#%= @book_id %>")-->
 <!--→JavaScriptのセレクタを使用して特定の要素を選択-->
 <!--→@book.idは現在の本のIDを参照し、セレクタは「idがfavorite_btn_〇〇」という要素を選択する。〇〇は実際の本のid-->
@@ -13,7 +13,7 @@ $("#favorite_btn_<%= @book.id %>").html("<%= j(render 'favorites/btn',  book: @b
 <!--→選択した要素の中身を置き換えるために使用-->
 
 <!--"<"%= j(render 'favorites/btn',  book: @book) >"-->
-<!--→javascriptを使うものの左横にjを入れる（j(javascript)の形で記述）-->
+<!--→javascriptを使うものの左横にjを入れる（j(javascript);の形で記述）-->
 <!--→()の中はviewに書いていたrenderものを入れ込む、render関数によりfavorites/btn部分テンプレートを呼び出す（@bookがローカル変数として渡される）-->
 
 <!--jQueryはjavascriptの中の一つ、javascriptを使う際の便利ツール-->
@@ -21,7 +21,7 @@ $("#favorite_btn_<%= @book.id %>").html("<%= j(render 'favorites/btn',  book: @b
 
 
 
-<!--classの場合>>$('.favorite-<#%= @favorite.book_id %>').html("<#%= j(render 'favorites/btn', book: @favorite.book ) %>")-->
+<!--classの場合>>$('.favorite-<#%= @favorite.book_id %>').html("<#%= j(render 'favorites/btn', book: @favorite.book ) %>");-->
 <!--$('.favorite-<#%= @favorite.book_id >')の部分-->
 <!--→特定のCSSクラスを持つ要素を選択するためのiQueryのセレクタ-->
 <!--→classかidを指定。favoriteというclassを指定したら、viewファイルでは"favorite-" + @book.id.to_sを記述する-->

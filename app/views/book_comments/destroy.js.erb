@@ -1,0 +1,8 @@
+<!--コメントの非同期化　　idかclassで設定する（今回はidで行う）-->
+
+<!--コメント数の表示（@comment.bookをローカル変数として渡す）-->
+$('#comment_counter').html("<%= j(render 'book_comments/counter',  book: @comment.book) %>");
+<!--コメント一覧の表示（@comment.bookをローカル変数として渡す-->
+$('#comment_index').html("<%= j(render 'book_comments/index',  book: @comment.book) %>");
+
+<!--$('#[htmlの部分テンプレート呼び出しのとこで設定したid]').html("<#%= j(部分テンプレート呼び出し構文) %>");-->
