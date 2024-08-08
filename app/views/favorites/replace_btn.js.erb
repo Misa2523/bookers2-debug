@@ -6,12 +6,18 @@ $('.favorite-<%= @favorite.book_id %>').html("<%= j(render 'favorites/btn',  boo
 <!--
 $('.favorite-<= @favorite.book_id >')の部分（%を省いている）
 　→特定のCSSクラスを持つ要素を選択するためのiQueryのセレクタ
-  →@favorite.book_idは、Rubyのコードで動的に生成された書籍のID（この部分で特定の書籍に関する要素を選択してる）
+　→$().html(j(javascript))
+　→$()の()内では、classかidを指定。今回はfavoriteというclassを指定したため、viewファイルでは"favorite-" + @book.id.to_sを記述している
+  →@favorite.book_idは、いいねを適用する書籍のidを指定（renderで変化させる場所を指定）
 
 .html()関数
+  →htmlに変換する、という記述
   →選択した要素の中身を置き換えるために使用
 
 "<= j(render 'favorites/btn',  book: @favorite.book ) >"の部分（%を省いている）
-  →Rubyのコードで生成されたHTMLを文字列として表してる
-  →render関数により、favorites/btn部分テンプレートを呼び出す（@favorite.bookがローカル変数として渡される）
+  →javascriptを使うものの左横にjを入れる（j(javascript)の形で記述）
+  →()の中はviewに書いていたrenderものを入れ込む、render関数によりfavorites/btn部分テンプレートを呼び出す（@favorite.bookがローカル変数として渡される）
+
+・jQueryはjavascriptの中の一つ、javascriptを使う際の便利ツール
+
 -->

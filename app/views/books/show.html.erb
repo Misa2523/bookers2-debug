@@ -27,7 +27,7 @@
           <td><%= link_to @book.title, @book %></td>
           <td><%= @book.body %></td>
           <!--いいね表示　　部分テンプレート（非同期通信の実装済み）-->
-          <td class=<%= "favorite-" + @book.id.to_s %> >
+          <td class=<%= "favorite-" + @book.id.to_s %> >    <!--一部だけ非同期化させるためにclassかidを指定-->
             <%= render "favorites/btn", book: @book %>
           </td>
           <!--コメント表示-->
