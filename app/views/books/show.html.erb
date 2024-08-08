@@ -27,11 +27,12 @@
           <td><%= link_to @book.title, @book %></td>
           <td><%= @book.body %></td>
           <!--いいね表示　　部分テンプレート（非同期通信の実装済み）-->
-          <td class=<%= "favorite-" + @book.id.to_s %> >    <!--一部だけ非同期化させるためにclassかidを指定-->
-            <%= render "favorites/btn", book: @book %>
-          </td>
-          <!--コメント表示-->
-          <td>コメント数:<%= @book.book_comments.count %></td>
+            <!--IDを要素に追加するとその要素を独自に特定できる。JavaScriptのコードでは、IDを使って特定の要素にアクセスして操作できる-->
+        <td id="favorite_btn_<%= @book.id %>" >   <!--書籍IDが1の場合はfavorite_btn_1というidになる-->
+          <%= render "favorites/btn", book: @book %>
+        </td>
+          <!--コメント数表示　　部分テンプレート-->
+          <td><%= render "book_comments/counter", book: @book %></td>
           <!--書籍作成者がログインしてるユーザーだったら編集ボタンと削除ボタンを表示-->
           <% if @book.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>

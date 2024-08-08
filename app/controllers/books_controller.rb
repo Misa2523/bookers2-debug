@@ -13,6 +13,9 @@ class BooksController < ApplicationController
   def index
     @book = Book.new
     @books = Book.all
+
+    #コメント数の表示用変数
+    # @book_count = Book.find(params[:id])
   end
 
   def create
