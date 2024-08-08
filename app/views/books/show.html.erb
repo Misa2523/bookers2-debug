@@ -32,9 +32,15 @@
             <%= render "favorites/btn", book: @book %>
           </td>
           <!--コメント数表示　　部分テンプレート（非同期通信の実装済み）-->
-          <td　id="comment_counter">
+
+
+          <td class="book-comments-counter">
+          <!--<td　id="comment_counter">-->
             <%= render "book_comments/counter", book: @book %>
+          <!--</td>-->
           </td>
+
+
           <!--書籍作成者がログインしてるユーザーだったら編集ボタンと削除ボタンを表示-->
           <% if @book.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
@@ -43,9 +49,14 @@
         </tr>
       </table>
       <!--コメント一覧　　部分テンプレート（非同期通信の実装済み）-->
-      <div id="comment_index">
+
+
+      <div class="book-comments-index">
+      <!--<div id="comment_index">-->
         <%= render "book_comments/index", book: @book %>
       </div>
+
+
       <!--コメント投稿フォーム　　部分テンプレート-->
       <div>
         <%= render "book_comments/form", book: @book, book_comment: @book_comment %>

@@ -24,9 +24,15 @@
           <%= render "favorites/btn", book: book %>
         </td>
         <!--コメント数表示　　部分テンプレート（非同期通信の実装済み）-->
-        <td　id="comment_counter">
+
+
+
+        <!--<td　id="comment_counter">-->
           <%= render "book_comments/counter", book: book %>
-        </td>
+        <!--</td>-->
+
+
+
       </tr>
     <% end %>
   </tbody>
