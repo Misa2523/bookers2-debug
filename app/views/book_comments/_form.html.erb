@@ -1,10 +1,10 @@
 <!--コメント投稿フォーム-->
 
-<div>
-  <!--コメントはbookに結び付いたbook_commentであるため、変数を２つ用意-->
-  <!--book_commentをcreateするためのリクエストは、ルーティングもネスト（親子関係）してるため、上記２つの情報が必要-->
-  <%= form_with model: [book, book_comment] do |f| %>
-    <div><%= f.text_area :comment, class: 'form-control' %></div>
-    <div><%= f.submit "送信" %></div>
-  <% end %>
-</div>
+<!--コメントはbookに結び付いたbook_commentであるため、変数を２つ用意-->
+<!--book_commentをcreateするためのリクエストは、ルーティングもネスト（親子関係）してるため、上記２つの情報が必要-->
+<!--form_withにオプションlocal: falseを記述すると非同期の状態になり、JavaScript形式でリクエストを送るようになる-->
+<%= form_with model: [book, book_comment], local: false do |f| %>
+  <!--id: "comment_textarea"を追加し、comment_textareaというIDをテキストエリアに割り当てる-->
+  <%= f.text_area :comment, class: 'form-control', id: "comment_textarea" %>
+  <%= f.submit "送信" %>
+<% end %>
