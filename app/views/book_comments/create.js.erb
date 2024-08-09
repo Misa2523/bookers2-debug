@@ -1,21 +1,15 @@
-<!--コメントの非同期化　　idかclassで設定する（今回はidで行う）-->
+<!--コメントの非同期化    idかclassで設定する（今回はidで行う）-->
 
 <!--コメント数の表示（@comment.bookをローカル変数として渡す）-->
-$('.book-comments-counter').html("<%= j(render 'book_comments/counter',  book: @comment.book) %>");
+$('#comment_counter').html("<%= j(render 'book_comments/counter',  book: @comment.book) %>");
 <!--コメントの投稿（@comment.bookをローカル変数として渡す-->
-$('.comment-comments-index').html("<%= j(render 'book_comments/index',  book: @comment.book) %>");
-
+$('#comment_index').html("<%= j(render 'book_comments/index',  book: @comment.book) %>");
 <!--$('#[htmlの部分テンプレート呼び出しのとこで設定したid]').html("<#%= j(部分テンプレート呼び出し構文) %>");-->
 
 <!--コメントの投稿-->
 <!--コメントの入力欄が空にリセットされ、ユーザーは新しいコメントを入力するために空のフォームから始めることができる-->
-$('.comment_textarea').val("");
+$('#comment_textarea').val("");
 <!--$('#comment_textarea').val("");は、コメントフォームのテキストエリアの値を空にする-->
 <!--テキストエリアはユーザーがテキストを入力するためのもので、その入力されたテキストは「値(Value)」として表現される-->
 <!--.val("")は、指定された要素の値を設定するための関数。()内には新しい値を指定。-->
 <!--↑今回だとテキストエリアの値が文字列に設定され、テキストエリアが空になるという動作をする-->
-
-
-<!--$('#comment_counter').html("<#%= j(render 'book_comments/counter',  book: @comment.book) %>");-->
-<!--$('#comment_index').html("<#%= j(render 'book_comments/index',  book: @comment.book) %>");-->
-<!--$('#comment_textarea').val("");-->

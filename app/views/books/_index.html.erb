@@ -18,21 +18,15 @@
         </td>
         <td><%= link_to book.title,book %></td>
         <td><%= book.body %></td>
-        <!--いいね表示　　部分テンプレート（非同期通信の実装済み）-->
+        <!--いいね表示  部分テンプレート（非同期通信の実装済み）-->
             <!--IDを要素に追加するとその要素を独自に特定できる。JavaScriptのコードでは、IDを使って特定の要素にアクセスして操作できる-->
         <td id="favorite_btn_<%= book.id %>" >   <!--書籍IDが1の場合はfavorite_btn_1というidになる-->
           <%= render "favorites/btn", book: book %>
         </td>
-        <!--コメント数表示　　部分テンプレート（非同期通信の実装済み）-->
-
-
-
-        <!--<td　id="comment_counter">-->
+        <!--コメント数表示  部分テンプレート（非同期通信の実装済み）-->
+        <td id="comment_counter">
           <%= render "book_comments/counter", book: book %>
-        <!--</td>-->
-
-
-
+        </td>
       </tr>
     <% end %>
   </tbody>
