@@ -1,21 +1,28 @@
 <!--コメント一覧表示-->
 
 <table>
-  <% book.book_comments.each do |book_comment| %>
+  <tbody>
+    <% book.book_comments.each do |book_comment| %>
     <tr>
-      <!--コメント投稿者の画像-->
-      <td><%= image_tag book_comment.user.get_profile_image, size:"100x100" %><br>
-      <!--コメント投稿者の名前（クリックしたらそのユーザーの詳細画面へ遷移）-->
-      <%= link_to book_comment.user.name, user_path(book_comment.user.id) %></td><!--book_comment.user.name-->
+      <td>
+        <%= link_to(book_comment.user) do %>  <!--クリックしたらそのユーザーの詳細画面へ遷移-->
+          <!--コメント投稿者の画像-->
+          <%= image_tag book_comment.user.get_profile_image, size:"100x100" %><br>
+          <!--コメント投稿者の名前-->
+          <%= book_comment.user.name %>
+        <% end %>
+      </td>
       <!--コメント本文-->
       <td><%= book_comment.comment %></td>
-      <!--コメント削除ボタン-->
       <td>
+        <!--コメント削除ボタン-->
         <% if book_comment.user == current_user %>
           <!--book_comment.bookはbook_commentの親のbookの情報（id）、book_commentはbook_commentの情報（id）を表す-->
-          <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete, class: "btn btn-sm btn-danger" %>
+          <!--link_toにオプションremomte: trueを記述すると非同期の状態になり、JavaScript形式でリクエストを送るようになる-->
+          <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete, class: "btn btn-sm btn-danger", remote: true %>
         <% end %>
       </td>
     </tr>
   <% end %>
+  </tbody>
 </table>

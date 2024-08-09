@@ -51,4 +51,25 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
+  #検索条件に応じてデータベースから該当するユーザーを取得
+  def self.search_for(content, method)  #selfをつけると、Userクラス自体のsearch_forメソッドを定義
+    #.selfをつけると、searches_controllerで呼び出す際にUser.をつけて呼び出せるようになる
+    #つけないとそのメソッドのみを表すが、selfをつけると規模感が大きくなりこのUserクラス(Userモデル)全体に働きかけるようになる
+    #参考URL：https://note.com/standenglish/n/nf231e8b464d0
+
+    if method == 'perfect'
+      #モデルクラス.where(カラム名: 値)　完全一致
+      User.where(name: content)
+    elsif method == 'forward'
+      #モデルクラス.where('カラム名 LIKE?', 値+'%')  前方一致
+      User.where('name LIKE ?', content+'%')
+    elsif method == 'backward'
+                                #'%'+値　後方位置
+      User.where('name LIKE ?', '%'+content)
+    else
+                                #'%'+値+'%')  値(文字列)を含む
+      User.where('name LIKE ?', '%'+content+'%')
+    end
+  end
+
 end
